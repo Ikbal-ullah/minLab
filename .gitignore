@@ -1,0 +1,9 @@
+build/
+*.o
+*.out
+/mini_matlab
+.vscode/
+.idea/
+.DS_Store
+CLAUDE.md
+.claude/
