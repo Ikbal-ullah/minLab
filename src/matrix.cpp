@@ -123,6 +123,16 @@ Matrix& Matrix::operator*=(double s) noexcept {
     return *this;
 }
 
+Matrix& Matrix::operator/=(double s) {
+    if (s==0.0) {
+        throw DivisionByZero("division by zero");
+    }
+    for (double& x : data_) {
+        x /= s;
+    }
+    return *this;
+}
+
 Matrix Matrix::transpose() const {
     Matrix out(cols_, rows_);
     for (std::size_t r = 0; r < rows_; ++r) {
@@ -176,6 +186,10 @@ Matrix operator*(double s, Matrix m) {
     return m;
 }
 
+Matrix operator/(Matrix m, double s) {
+    m /= s;
+    return m;
+}
 bool operator==(const Matrix& a, const Matrix& b) noexcept {
     if (a.rows() != b.rows() || a.cols() != b.cols()) {
         return false;

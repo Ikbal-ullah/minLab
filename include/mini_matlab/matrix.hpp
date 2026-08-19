@@ -22,6 +22,10 @@ public:
     using MatrixError::MatrixError;
 };
 
+class DivisionByZero : public MatrixError {
+public:
+    using MatrixError::MatrixError;
+};
 // A dense, row-major matrix of doubles.
 //
 // Invariant: data_.size() == rows_ * cols_.
@@ -69,7 +73,7 @@ public:
     Matrix& operator+=(const Matrix& rhs);
     Matrix& operator-=(const Matrix& rhs);
     Matrix& operator*=(double s) noexcept;
-
+    Matrix& operator/=(double s);
     Matrix transpose() const;
 
     const double* data() const noexcept { return data_.data(); }
@@ -98,7 +102,7 @@ Matrix operator-(Matrix lhs, const Matrix& rhs);
 Matrix operator*(const Matrix& lhs, const Matrix& rhs);
 Matrix operator*(Matrix m, double s);
 Matrix operator*(double s, Matrix m);
-
+Matrix operator/(Matrix m, double s);
 // Exact comparison. NaN != NaN, and -0.0 == 0.0. Suitable for structural tests,
 // not for comparing results of different floating-point computations.
 bool operator==(const Matrix& a, const Matrix& b) noexcept;

@@ -15,6 +15,7 @@ option(MINI_MATLAB_TRACE_SPECIAL
 
 add_library(mini_matlab_core STATIC
     src/matrix.cpp
+    src/solve.cpp
 )
 
 # PUBLIC: matrix.cpp needs include/ to find its own header, and so does every
@@ -41,3 +42,7 @@ add_test(NAME smoke COMMAND smoke_tests)
 add_executable(matrix_tests tests/test_matrix.cpp)
 target_link_libraries(matrix_tests PRIVATE mini_matlab_core)
 add_test(NAME matrix COMMAND matrix_tests)
+
+add_executable(solve_tests tests/test_solve.cpp)
+target_link_libraries(solve_tests PRIVATE mini_matlab_core)
+add_test(NAME solve COMMAND solve_tests)
